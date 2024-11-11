@@ -151,6 +151,20 @@
                 padding: 1rem;
                 margin-top: auto;
             }
+
+            .pdf-link {
+                margin-left: 0.5rem;
+                color: var(--accent-color);
+                text-decoration: none;
+            }
+
+            .cv-link {
+                color: var(--accent-color);
+                text-decoration: none;
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
         </style>
     </head>
     <body>
@@ -177,6 +191,12 @@
         <section id="about" class="active">
             <h2>About</h2>
             <p>I am an astronomer and exoplanet scientist at UC Santa Cruz, specializing in the study of planets beyond our solar system. My research focuses on characterizing exoplanet atmospheres and developing new methods for planetary detection and analysis.</p>
+            
+            <p>
+                <a href="CV_Nour_Skaf_UH.pdf" target="_blank" class="cv-link">
+                    <i class="fas fa-file-pdf"></i> Curriculum Vitae
+                </a>
+            </p>
         </section>
 
         <section id="research">
@@ -195,7 +215,14 @@
             
             <div class="publications">
                 <div class="publication">
-                    <p class="publication-title"><a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=I5JBbQsAAAAJ&citation_for_view=I5JBbQsAAAAJ:M3ejUd6NZC8C">Images of embedded Jovian planet formation at a wide separation around AB Aurigae</a></p>
+                    <p class="publication-title">
+                        <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=I5JBbQsAAAAJ&citation_for_view=I5JBbQsAAAAJ:M3ejUd6NZC8C">
+                            Images of embedded Jovian planet formation at a wide separation around AB Aurigae
+                        </a>
+                        <a href="pdfs/your-paper.pdf" target="_blank" class="pdf-link">
+                            [PDF]
+                        </a>
+                    </p>
                     <p>Currie et al. (2022), Nature Astronomy 6(6)</p>
                     <p class="citation-count">Citations: 162</p>
                 </div>
