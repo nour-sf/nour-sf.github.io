@@ -22,9 +22,32 @@
 
         header {
             background: var(--primary-color);
+            background-image: url('images/carlos_cass.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             color: white;
             padding: 2rem;
             text-align: center;
+            position: relative;
+        }
+
+        /* Add a semi-transparent overlay to ensure text remains readable */
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(44, 62, 80, 0.7); /* Using primary-color with opacity */
+            z-index: 1;
+        }
+
+        /* Ensure header content stays above the overlay */
+        .profile-container {
+            position: relative;
+            z-index: 2;
         }
 
         nav {
