@@ -1,319 +1,535 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Nour Skaf - Astronomer</title>
-        <style>
-            :root {
-                --primary-color: #2c3e50;
-                --secondary-color: #34495e;
-                --accent-color: #3498db;
-                --text-color: #333;
-                --light-bg: #f5f6fa;
-            }
+<!DOCTYPE html>
+<html lang="en">
 
-            body {
-                font-family: 'Helvetica Neue', Arial, sans-serif;
-                line-height: 1.6;
-                min-height: 100vh;
-                display: flex;
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nour Skaf - Astronomer</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --text-color: #333;
+            --light-bg: #f5f6fa;
+        }
+
+        body {
+            font-family: 'Gill Sans', 'Gill Sans Light', 'Gill Sans MT', sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            color: var(--text-color);
+            font-weight: 300;
+        }
+
+        header {
+            background: var(--primary-color);
+            background-image: url('images/carlos_cass.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Add a semi-transparent overlay to ensure text remains readable */
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(44, 62, 80, 0.4);
+            /* Changed from 0.7 to 0.4 for less transparency */
+            z-index: 1;
+        }
+
+        /* Ensure header content stays above the overlay */
+        .profile-container {
+            position: relative;
+            z-index: 2;
+        }
+
+        nav {
+            background: var(--secondary-color);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            padding: 0.5rem 1rem;
+            transition: background-color 0.3s;
+        }
+
+        nav a.active {
+            background-color: var(--accent-color);
+            border-radius: 4px;
+        }
+
+        section {
+            display: none;
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            flex-grow: 1;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: var(--primary-color);
+        }
+
+        .publication {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .publication-title {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .citation-count {
+            color: var(--secondary-color);
+            font-style: italic;
+        }
+
+        .profile-container {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding-left: 5%;
+            width: 100%;
+        }
+
+        .profile-image {
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-text {
+            text-align: left;
+        }
+
+        @media (max-width: 768px) {
+            .profile-container {
                 flex-direction: column;
-                margin: 0;
-                color: var(--text-color);
-            }
-
-            header {
-                background: var(--primary-color);
-                background-image: url('images/carlos_cass.jpg');
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-                color: white;
-                padding: 2rem;
                 text-align: center;
-                position: relative;
-            }
-
-            /* Add a semi-transparent overlay to ensure text remains readable */
-            header::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: rgba(44, 62, 80, 0.7); /* Using primary-color with opacity */
-                z-index: 1;
-            }
-
-            /* Ensure header content stays above the overlay */
-            .profile-container {
-                position: relative;
-                z-index: 2;
-            }
-
-            nav {
-                background: var(--secondary-color);
-                padding: 1rem;
-                position: sticky;
-                top: 0;
-            }
-
-            nav a {
-                color: white;
-                text-decoration: none;
-                margin: 0 1rem;
-                padding: 0.5rem 1rem;
-                transition: background-color 0.3s;
-            }
-
-            nav a.active {
-                background-color: var(--accent-color);
-                border-radius: 4px;
-            }
-
-            section {
-                display: none;
-                padding: 3rem 2rem;
-                max-width: 1200px;
-                margin: 0 auto;
-                width: 100%;
-                flex-grow: 1;
-            }
-
-            section.active {
-                display: block;
-            }
-
-            h1, h2, h3 {
-                color: var(--primary-color);
-            }
-
-            .publication {
-                margin-bottom: 1.5rem;
-                padding-bottom: 1.5rem;
-                border-bottom: 1px solid #eee;
-            }
-
-            .publication-title {
-                color: var(--accent-color);
-                font-weight: bold;
-            }
-
-            .citation-count {
-                color: var(--secondary-color);
-                font-style: italic;
-            }
-
-            .profile-container {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 2rem;
-                max-width: 1200px;
-                margin: 0 auto;
-            }
-
-            .profile-image {
-                width: 200px;
-                height: 200px;
-                border-radius: 50%;
-                object-fit: cover;
-                border: 4px solid white;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                padding-left: 0;
             }
 
             .profile-text {
-                text-align: left;
-            }
-
-            @media (max-width: 768px) {
-                .profile-container {
-                    flex-direction: column;
-                    text-align: center;
-                }
-                
-                .profile-text {
-                    text-align: center;
-                }
-                
-                .profile-image {
-                    width: 150px;
-                    height: 150px;
-                }
-            }
-
-            footer {
-                background: var(--primary-color);
-                color: white;
                 text-align: center;
-                padding: 1rem;
-                margin-top: auto;
             }
 
-            .pdf-link {
-                margin-left: 0.5rem;
-                color: var(--accent-color);
-                text-decoration: none;
+            .profile-image {
+                width: 300px;
+                height: 300px;
+            }
+        }
+
+        footer {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: auto;
+        }
+
+        .pdf-link {
+            margin-left: 0.5rem;
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .cv-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .carousel-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 2rem auto;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel img {
+            width: 100%;
+            flex-shrink: 0;
+            height: 600px;
+            object-fit: contain;
+            background: black;
+            padding: 10px;
+        }
+
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 1rem;
+            border: none;
+            cursor: pointer;
+            z-index: 10;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-button:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .prev {
+            left: 20px;
+        }
+
+        .next {
+            right: 20px;
+        }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background: white;
+        }
+
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        .photo-gallery img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .photo-gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Optional: Add responsive adjustments */
+        @media (max-width: 768px) {
+            .photo-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 15px;
+                padding: 15px;
             }
 
-            .cv-link {
-                color: var(--accent-color);
-                text-decoration: none;
-                display: inline-flex;
-                align-items: center;
-                gap: 0.5rem;
+            .photo-gallery img {
+                height: 250px;
             }
-        </style>
-    </head>
-    <body>
-        <header>
-            <div class="profile-container">
-                <img src="https://pbs.twimg.com/profile_images/1446142080900866048/0n0mqB7d_400x400.jpg" 
-                    alt="Nour Skaf" 
-                    class="profile-image">
-                <div class="profile-text">
-                    <p style="font-size: 2em; font-weight: bold;">Nour Skaf</p>
-                    <p>Astronomer | Exoplanet Scientist</p>
-                    <p>UC Santa Cruz</p>
-                </div>
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
+        .close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-lightbox:hover {
+            color: #bbb;
+        }
+
+        /* Update the gallery images to show pointer cursor */
+        .photo-gallery img {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="profile-container">
+            <img src="images/profile_nour_computer.png" alt="Nour Skaf" class="profile-image">
+            <div class="profile-text">
+                <p style="font-size: 2em; font-weight: bold;">Nour Skaf</p>
+                <p>Astronomer | Exoplanet Scientist</p>
+                <p>UC Santa Cruz</p>
             </div>
-        </header>
+        </div>
+    </header>
 
-        <nav>
-            <a href="#about" class="nav-link active">About</a>
-            <a href="#research" class="nav-link">Research</a>
-            <a href="#publications" class="nav-link">Publications</a>
-            <a href="#photography" class="nav-link">Photography</a>
-        </nav>
+    <nav>
+        <a href="#about" class="nav-link active">About</a>
+        <a href="#research" class="nav-link">Research</a>
+        <a href="#outreach" class="nav-link">Outreach</a>
+        <a href="#photography" class="nav-link">Photography</a>
+    </nav>
 
-        <section id="about" class="active">
-            <h2>About</h2>
-            <p>I am an astronomer and exoplanet scientist at UC Santa Cruz, specializing in the study of planets beyond our solar system. My research focuses on characterizing exoplanet atmospheres and developing new methods for planetary detection and analysis.</p>
-            
-            <p>
-                <a href="CV_Nour_Skaf_UH.pdf" target="_blank" class="cv-link">
-                    <i class="fas fa-file-pdf"></i> Curriculum Vitae
-                </a>
-            </p>
-        </section>
+    <section id="about" class="active">
+        <h2>About</h2>
+        <p>I am an astronomer and exoplanet scientist at UC Santa Cruz, specializing in the study of planets beyond our
+            solar system. My research focuses on characterizing exoplanet atmospheres and developing new methods for
+            planetary detection and analysis.</p>
 
-        <section id="research">
-            <h2>Research</h2>
-            <p>My research interests include:</p>
-            <ul>
-                <li>Exoplanet atmospheric characterization</li>
-                <li>Space-based observations using HST/WFC3</li>
-                <li>Adaptive optics systems</li>
-                <li>Direct imaging of exoplanets</li>
-            </ul>
-        </section>
+        <p align="justify">
+            You can find my publications on <a
+                href="https://scholar.google.com/citations?user=I5JBbQsAAAAJ&hl=en&oi=ao">Google Scholar</a>, <a
+                href="https://orcid.org/0000-0002-9372-5056">ORCID</a>, and <a
+                href="https://ui.adsabs.harvard.edu/search/fq=%7B!type%3Daqp%20v%3D%24fq_database%7D&fq_database=(database%3Aastronomy%20OR%20database%3Aphysics)&q=%20author%3A%22skaf%2Cnour%22&sort=date%20desc%2C%20bibcode%20desc&p_=0">NASA
+                ADS</a>.
+        </p>
+        <p>
 
-        <section id="publications">
-            <h2>Selected Publications</h2>
-            
-            <div class="publications">
-                <div class="publication">
-                    <p class="publication-title">
-                        <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=I5JBbQsAAAAJ&citation_for_view=I5JBbQsAAAAJ:M3ejUd6NZC8C">
-                            Images of embedded Jovian planet formation at a wide separation around AB Aurigae
-                        </a>
-                        <a href="pdfs/your-paper.pdf" target="_blank" class="pdf-link">
-                            [PDF]
-                        </a>
-                    </p>
-                    <p>Currie et al. (2022), Nature Astronomy 6(6)</p>
-                    <p class="citation-count">Citations: 162</p>
-                </div>
-            
-                <div class="publication">
-                    <p class="publication-title"><a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=I5JBbQsAAAAJ&citation_for_view=I5JBbQsAAAAJ:9yKSN-GCB0IC">No clear, direct evidence for multiple protoplanets orbiting LkCa 15: LkCa 15 bcd are likely inner disk signals</a></p>
-                    <p>Currie et al. (2019), The Astrophysical Journal Letters 877(1)</p>
-                    <p class="citation-count">Citations: 113</p>
-                </div>
-            
-                <div class="publication">
-                    <p class="publication-title"><a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=I5JBbQsAAAAJ&citation_for_view=I5JBbQsAAAAJ:IjCSPb-OGe4C">ARES I: WASP-76 b, A tale of two HST spectra</a></p>
-                    <p>Edwards et al. (2020), The Astronomical Journal 160(1)</p>
-                    <p class="citation-count">Citations: 87</p>
-                </div>
-            
-                <div class="publication">
-                    <p class="publication-title"><a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=I5JBbQsAAAAJ&citation_for_view=I5JBbQsAAAAJ:YsMSGLbcyi4C">ARES. II. Characterizing the Hot Jupiters WASP-127 b, WASP-79 b, and WASP-62b with the Hubble Space Telescope</a></p>
-                    <p>Skaf et al. (2020), The Astronomical Journal 160(3)</p>
-                    <p class="citation-count">Citations: 82</p>
-                </div>
-            
-                <div class="publication">
-                    <p class="publication-title"><a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=I5JBbQsAAAAJ&citation_for_view=I5JBbQsAAAAJ:d1gkVwhDpl0C">SCExAO, an instrument with a dual purpose: perform cutting-edge science and develop new technologies</a></p>
-                    <p>Lozi et al. (2018), Adaptive Optics Systems VI 10703</p>
-                    <p class="citation-count">Citations: 81</p>
-                </div>
-            
-                <div class="publication">
-                    <p class="publication-title"><a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=I5JBbQsAAAAJ&citation_for_view=I5JBbQsAAAAJ:UeHWp8X0CEIC">SCExAO/CHARIS near-infrared direct imaging, spectroscopy, and forward-modeling of κ and b: A likely young, low-gravity superjovian companion</a></p>
-                    <p>Currie et al. (2018), The Astronomical Journal 156(6)</p>
-                    <p class="citation-count">Citations: 78</p>
-                </div>
-            
-                <div class="publication">
-                    <p class="publication-title"><a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=I5JBbQsAAAAJ&citation_for_view=I5JBbQsAAAAJ:u-x6o8ySG0sC">The compute and control for adaptive optics (CACAO) real-time control software package</a></p>
-                    <p>Guyon et al. (2018), Adaptive Optics Systems VI 10703</p>
-                    <p class="citation-count">Citations: 77</p>
-                </div>
-            
-                <div class="publication">
-                    <p class="publication-title"><a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=I5JBbQsAAAAJ&citation_for_view=I5JBbQsAAAAJ:0EnyYjriUFMC">ARES V. No evidence for molecular absorption in the HST WFC3 spectrum of GJ 1132 b</a></p>
-                    <p>Mugnai et al. (2021), The Astronomical Journal 161(6)</p>
-                    <p class="citation-count">Citations: 65</p>
-                </div>
+        <p align="justify">
+            Here is my <a href="CV_Nour_Skaf_UH.pdf" target="_blank" class="cv-link">Curriculum Vitae</a>, that includes
+            my research interests and publications, as well as my outreach work.
+        </p>
+        <p>
+
+            </a>
+        </p>
+    </section>
+
+    <section id="research">
+        <h2>Research</h2>
+        <p> Under construction :) </p>
+        <p>My research interests include:</p>
+        <ul>
+            <li>Exoplanet atmospheric characterization</li>
+            <li>Space-based observations using HST/WFC3</li>
+            <li>Adaptive optics systems</li>
+            <li>Direct imaging of exoplanets</li>
+        </ul>
+    </section>
+
+    <section id="outreach">
+        <h2>Outreach</h2>
+        <p align="justify">
+        <p> Under construction :) </p>
+
+        <p align="justify">
+            Astronomy and space exploration inherently unite us, tracing back to our cosmic origins. Unfortunately, many
+            emerging countries lack access to these opportunities. In a post-Covid world marked by climate change and
+            social injustices, addressing this inequality becomes imperative. Despite commendable efforts, more action
+            is needed to ensure genuine inclusivity in astronomy.
+        </p>
+
+        <p align="justify">
+            A key aspect is fostering communication between countries, allowing us to witness diverse approaches
+            influenced by unique cultures and challenges. Enter citizen science, a transformative force revolutionizing
+            astronomy by engaging enthusiasts globally. Projects like Unistellar's Exoplanet Observation Network,
+            ExoClock, and PANOPTES showcase the power of citizen science.
+        </p>
+
+        <p align="justify">
+            Enthusiasts contribute significantly to exoplanet research, refine ephemerides, and even build low-cost
+            telescopes for transit detection. These examples underscore the democratization of astronomical knowledge,
+            promoting global collaboration and positioning astronomy as a cornerstone for education, technological
+            advancement, and peace-building.
+        </p>
+    </section>
+
+    <section id="photography">
+        <h2>Photography</h2>
+
+        <div class="carousel-container">
+            <div class="carousel">
+                <img src="images/photography/carlos_cass.jpg" alt="Carlos Cassini">
+                <img src="images/photography/auroras_SC.jpg" alt="Aurora at Santa Cruz">
+                <img src="images/photography/tube_pink.jpg" alt="Pink Telescope Tube">
+                <img src="images/photography/tube_ks1.jpg" alt="Telescope KS1">
+                <img src="images/photography/tube_k1.jpg" alt="Telescope K1">
+                <img src="images/photography/sunset_ocean.jpg" alt="Ocean Sunset">
+                <img src="images/photography/sunrise_Milkyway.jpg" alt="Milky Way at Sunrise">
+                <img src="images/photography/subaru_keck_jp_lgs.jpg" alt="Subaru Keck Telescope">
+                <img src="images/photography/seabright_moonrise.jpg" alt="Moonrise at Seabright">
+                <img src="images/photography/Nour_Skaf_miroirs-sabliers.jpg" alt="Mirrors and Hourglasses">
+                <img src="images/photography/eclipse_2024.jpg" alt="Solar Eclipse 2024">
             </div>
-            
-        </section>
+            <button class="carousel-button prev">&#10094;</button>
+            <button class="carousel-button next">&#10095;</button>
+            <div class="carousel-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
 
-        <section id="photography">
-            <h2>Photography</h2>
-            <p>Coming soon...</p>
-        </section>
+        <div class="photo-gallery">
+            <img src="images/photography/auroras_SC.jpg" alt="Aurora at Santa Cruz">
+            <img src="images/photography/carlos_cass.jpg" alt="Carlos Cassini">
+            <img src="images/photography/tube_pink.jpg" alt="Pink Telescope Tube">
+            <img src="images/photography/tube_ks1.jpg" alt="Telescope KS1">
+            <img src="images/photography/tube_k1.jpg" alt="Telescope K1">
+            <img src="images/photography/sunset_ocean.jpg" alt="Ocean Sunset">
+            <img src="images/photography/sunrise_Milkyway.jpg" alt="Milky Way at Sunrise">
+            <img src="images/photography/subaru_keck_jp_lgs.jpg" alt="Subaru Keck Telescope">
+            <img src="images/photography/seabright_moonrise.jpg" alt="Moonrise at Seabright">
+            <img src="images/photography/Nour_Skaf_miroirs-sabliers.jpg" alt="Mirrors and Hourglasses">
+            <img src="images/photography/eclipse_2024.jpg" alt="Solar Eclipse 2024">
+        </div>
+    </section>
 
-        <footer>
-            <p>© 2024 Nour Skaf</p>
-        </footer>
+    <footer>
+        <p>© 2024 Nour Skaf</p>
+    </footer>
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                // Get all navigation links
-                const navLinks = document.querySelectorAll('.nav-link');
-                
-                // Add click event listener to each link
-                navLinks.forEach(link => {
-                    link.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        
-                        // Remove active class from all links and sections
-                        navLinks.forEach(l => l.classList.remove('active'));
-                        document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-                        
-                        // Add active class to clicked link
-                        this.classList.add('active');
-                        
-                        // Show corresponding section
-                        const sectionId = this.getAttribute('href').substring(1);
-                        document.getElementById(sectionId).classList.add('active');
-                        
-                        // Update URL hash without scrolling
-                        history.pushState(null, null, `#${sectionId}`);
-                    });
+    <div id="lightbox" class="lightbox" style="display: none;">
+        <span class="close-lightbox">&times;</span>
+        <img id="lightbox-img" src="" alt="">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get all navigation links
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            // Add click event listener to each link
+            navLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    // Remove active class from all links and sections
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+
+                    // Add active class to clicked link
+                    this.classList.add('active');
+
+                    // Show corresponding section
+                    const sectionId = this.getAttribute('href').substring(1);
+                    document.getElementById(sectionId).classList.add('active');
+
+                    // Update URL hash without scrolling
+                    history.pushState(null, null, `#${sectionId}`);
                 });
-
-                // Handle direct URL access with hash
-                if (window.location.hash) {
-                    const hash = window.location.hash.substring(1);
-                    const link = document.querySelector(`a[href="#${hash}"]`);
-                    if (link) link.click();
-                }
             });
-        </script>
-    </body>
-    </html>
+
+            // Handle direct URL access with hash
+            if (window.location.hash) {
+                const hash = window.location.hash.substring(1);
+                const link = document.querySelector(`a[href="#${hash}"]`);
+                if (link) link.click();
+            }
+
+            const carousel = document.querySelector('.carousel');
+            const prevButton = document.querySelector('.prev');
+            const nextButton = document.querySelector('.next');
+            const dots = document.querySelectorAll('.dot');
+            let currentIndex = 0;
+
+            // Function to update carousel position
+            function updateCarousel() {
+                carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+                // Update dots
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
+            }
+
+            // Next button click
+            nextButton.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % carousel.children.length;
+                updateCarousel();
+            });
+
+            // Previous button click
+            prevButton.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + carousel.children.length) % carousel.children.length;
+                updateCarousel();
+            });
+
+            // Dot clicks
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateCarousel();
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
